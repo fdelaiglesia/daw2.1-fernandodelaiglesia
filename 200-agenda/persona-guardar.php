@@ -17,7 +17,7 @@
 	if ($nueva_entrada) {
 		// Quieren CREAR una nueva entrada, así que es un INSERT.
  		$sql = "INSERT INTO persona (nombre,telefono,categoria_id) VALUES (?,?,?)";
- 		$parametros = [$nombre];
+ 		$parametros = [$nombre,$telefono,$categoria_id];
 	} else {
 		// Quieren MODIFICAR una categoría existente y es un UPDATE.
  		$sql = "UPDATE persona SET nombre=?, telefono=?, categoria_id=? WHERE id=?";
@@ -79,7 +79,7 @@
 	}
 ?>
 
-<a href="persona-listado.php">Volver al listado de categorías.</a>
+<a href="persona-listado.php">Volver al listado de personas.</a>
 
 </body>
 

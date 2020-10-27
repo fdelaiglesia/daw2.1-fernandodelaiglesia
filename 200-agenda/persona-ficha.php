@@ -12,7 +12,9 @@
 	$nueva_entrada = ($id == -1);
 
 	if ($nueva_entrada) { // Quieren CREAR una nueva entrada, así que no se cargan datos.
-		$persona_nombre = "<introduzca nombre>";
+        $persona_nombre = "<introduzca nombre>";
+        $persona_telefono = "<introduzca telefono>";
+        $persona_idc = "<introduzca id de categoria>";
 	} else { // Quieren VER la ficha de una categoría existente, cuyos datos se cargan.
 		$sql = "SELECT * FROM persona  WHERE id=? ";
 
@@ -62,7 +64,7 @@
 </ul>
 
 <?php if ($nueva_entrada) { ?>
-	<input type="submit" name="crear" value="Crear categoría" />
+	<input type="submit" name="crear" value="Añadir persona" />
 <?php } else { ?>
 	<input type="submit" name="guardar" value="Guardar cambios" />
 <?php } ?>

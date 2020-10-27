@@ -52,7 +52,7 @@
 
 <br />
 
-<a href="persona-ficha.php">Añadir una persona</a>
+<a href="persona-ficha.php?id=-1">Añadir una persona</a>
 
 <br />
 <br />
