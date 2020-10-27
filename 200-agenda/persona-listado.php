@@ -42,9 +42,9 @@
 	<?php
         foreach ($personas as $fila) { ?>
 			<tr>
-				<td><a href= ""> <?=$fila["p_nombre"] ?> </a></td>
-                <td><a href= ""> <?=$fila["c_nombre"] ?> </a></td>
-				<td><a href="?>"> (X)                   </a></td>
+				<td><a href= "persona-ficha.php?id=<?=$fila["p_id"]?>"> <?=$fila["p_nombre"] ?> </a></td>
+                <td><a href= "categoria-ficha.php?id=<?=$fila["c_id"]?>"> <?=$fila["c_nombre"] ?> </a></td>
+				<td><a href="persona-eliminar.php?id=<?=$fila["p_id"]?>"> (X)                   </a></td>
 			</tr>
 	<?php } ?>
 
@@ -52,12 +52,12 @@
 
 <br />
 
-<a href="">Añadir una persona</a>
+<a href="persona-ficha.php">Añadir una persona</a>
 
 <br />
 <br />
 
-<a href="">Gestionar listado de Categorias</a>
+<a href="categoria-listado.php">Gestionar listado de Categorias</a>
 
 </body>
 
