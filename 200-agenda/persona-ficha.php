@@ -16,17 +16,25 @@
         $persona_telefono = "<introduzca telefono>";
         $persona_idc = "<introduzca id de categoria>";
 	} else { // Quieren VER la ficha de una categoría existente, cuyos datos se cargan.
-		$sql = "SELECT * FROM persona  WHERE id=? ";
+		$sqlPersona = "SELECT * FROM persona  WHERE id=? ";
 
-        $select = $pdo->prepare($sql);
-        $select->execute([$id]); // Se añade el parámetro a la consulta preparada.
-        $rs = $select->fetchAll();
+        $selectPersona = $pdo->prepare($sqlPersona);
+        $selectPersona->execute([$id]); // Se añade el parámetro a la consulta preparada.
+        $rsPersona = $selectPersona->fetchAll();
 		
 		 // Con esto, accedemos a los datos de la primera (y esperemos que única) fila que haya venido.
-        $persona_nombre = $rs[0]["nombre"];
-        $persona_telefono = $rs[0]["telefono"];
-        $persona_idc = $rs[0]["categoria_id"];
+        $persona_nombre = $rsPersona[0]["nombre"];
+        $persona_telefono = $rsPersona[0]["telefono"];
+        $persona_idc = $rsPersona[0]["categoria_id"];
+
+
+
 	}
+$sqlCategoria ="SELECT * FROM categoria";
+$selectCategoria = $pdo->prepare($sqlCategoria);
+$selectCategoria->execute([]);
+$rsCategoria = $selectCategoria->fetchAll();
+
 ?>
 <html>
 
@@ -59,7 +67,12 @@
 	</li>
     <li>
 		<strong>Categoria: </strong>
-		<input type="text" name="categoria_id" value="<?=$persona_idc?>" />
+        <select name="categoria_id" >
+            <?php foreach ($rsCategoria as $fila){?>
+            <option value="<?=$fila["id"]?>"><?=$fila["nombre"]?></option>
+            <?php
+            }?>
+        </select>
 	</li>
 </ul>
 
@@ -73,12 +86,12 @@
 
 <br />
 
-<a href="persona-eliminar.php?id=<?=$id ?>">Eliminar persona</a>
+<a href="persona-eliminar.php?id=<?=$id ?>">Eliminar Personas</a>
 
 <br />
 <br />
 
-<a href="persona-listado.php">Volver al listado de personas.</a>
+<a href="persona-listado.php">Volver al listado de Personas.</a>
 
 </body>
 

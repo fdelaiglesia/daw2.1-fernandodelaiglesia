@@ -40,11 +40,11 @@
 	</tr>
 
 	<?php
-        foreach ($personas as $fila) { ?>
+        foreach ($personas as $filaUnica) { ?>
 			<tr>
-				<td><a href= "persona-ficha.php?id=<?=$fila["p_id"]?>"> <?=$fila["p_nombre"] ?> </a></td>
-                <td><a href= "categoria-ficha.php?id=<?=$fila["c_id"]?>"> <?=$fila["c_nombre"] ?> </a></td>
-				<td><a href="persona-eliminar.php?id=<?=$fila["p_id"]?>"> (X)                   </a></td>
+				<td><a href= "persona-ficha.php?id=<?=$filaUnica["p_id"]?>"> <?=$filaUnica["p_nombre"] ?> </a></td>
+                <td><a href= "categoria-ficha.php?id=<?=$filaUnica["c_id"]?>"> <?=$filaUnica["c_nombre"] ?> </a></td>
+				<td><a href="persona-eliminar.php?id=<?=$filaUnica["p_id"]?>"> (X)                   </a></td>
 			</tr>
 	<?php } ?>
 
