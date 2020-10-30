@@ -69,7 +69,8 @@ $rsCategoria = $selectCategoria->fetchAll();
 		<strong>Categoria: </strong>
         <select name="categoria_id" >
             <?php foreach ($rsCategoria as $fila){?>
-            <option value="<?=$fila["id"]?>"><?=$fila["nombre"]?></option>
+            <option value="<?=$fila["id"]?>" <?php if($fila["id"] == $persona_idc)
+            {echo "selected = 'true'";}?>><?=$fila["nombre"]?></option>
             <?php
             }?>
         </select>
