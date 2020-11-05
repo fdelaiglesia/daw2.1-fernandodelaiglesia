@@ -21,32 +21,38 @@
 <html>
 
 <head>
-	<meta charset="UTF-8">
+
+    <meta charset="UTF-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <link rel="stylesheet" href="css.css">
 </head>
 
 
 
 <body>
-
+<nav class="navbar navbar-dark bg-primary">
+    <a class="navbar-brand">Agenda</a>
+</nav>
+<div id="body">
 <?php if ($correcto) { ?>
 
 	<h1>Eliminación completada</h1>
-	<p>Se ha eliminado correctamente la categoría.</p>
+	<p>Se ha eliminado correctamente la persona.</p>
 
 <?php } else if ($no_existia) { ?>
 
 	<h1>Eliminación imposible</h1>
-	<p>No existe la categoría que se pretende eliminar (¿ha manipulado Vd. el parámetro id?).</p>
+	<p>No existe la persona que se pretende eliminar (¿ha manipulado Vd. el parámetro id?).</p>
 
 <?php } else { ?>
 
 	<h1>Error en la eliminación</h1>
-	<p>No se ha podido eliminar la categoría o la categoría no existía.</p>
+	<p>No se ha podido eliminar la persona o la persona no existía.</p>
 
 <?php } ?>
 
-<a href="persona-listado.php">Volver al listado de personas.</a>
-
+<a href="persona-listado.php" class="btn btn-primary">Volver al listado de personas.</a>
+</div>
 </body>
 
 </html>

@@ -31,12 +31,17 @@
 
 <head>
 	<meta charset="UTF-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <link rel="stylesheet" href="css.css">
 </head>
 
 
 
 <body>
-
+<nav class="navbar navbar-dark bg-primary">
+    <a class="navbar-brand">Agenda</a>
+</nav>
+<div id="body">
 <?php if ($nueva_entrada) { ?>
 	<h1>Nueva ficha de categoría</h1>
 <?php } else { ?>
@@ -47,30 +52,27 @@
 
 <input type="hidden" name="id" value="<?=$id?>" />
 
-<ul>
-	<li>
+<ul class="list-group">
+	<li class="list-group-item list-group-item-action">
 		<strong>Nombre: </strong>
 		<input type="text" name="nombre" value="<?=$categoria_nombre?>" />
 	</li>
 </ul>
 
 <?php if ($nueva_entrada) { ?>
-	<input type="submit" name="crear" value="Crear categoría" />
+	<input type="submit" name="crear" value="Crear categoría" class="btn btn-primary" />
 <?php } else { ?>
-	<input type="submit" name="guardar" value="Guardar cambios" />
+	<input type="submit" name="guardar" value="Guardar cambios" class="btn btn-primary" />
 <?php } ?>
 
 </form>
 
-<br />
 
-<a href="categoria-eliminar.php?id=<?=$id ?>">Eliminar categoría</a>
+<a href="categoria-eliminar.php?id=<?=$id ?>" class="btn btn-primary">Eliminar categoría</a>
 
-<br />
-<br />
 
-<a href="categoria-listado.php">Volver al listado de categorías.</a>
-
+<a href="categoria-listado.php" class="btn btn-primary">Volver al listado de categorías.</a>
+</div>
 </body>
 
 </html>

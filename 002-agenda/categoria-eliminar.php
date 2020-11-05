@@ -29,12 +29,17 @@
 
 <head>
 	<meta charset="UTF-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <link rel="stylesheet" href="css.css">
 </head>
 
 
 
 <body>
-
+<nav class="navbar navbar-dark bg-primary">
+    <a class="navbar-brand">Agenda</a>
+</nav>
+<div id="body">
 <?php if ($correcto) { ?>
 
 	<h1>Eliminación completada</h1>
@@ -52,8 +57,8 @@
 
 <?php } ?>
 
-<a href="categoria-listado.php">Volver al listado de categorías.</a>
-
+<a href="categoria-listado.php" class="btn btn-primary">Volver al listado de categorías.</a>
+</div>
 </body>
 
 </html>

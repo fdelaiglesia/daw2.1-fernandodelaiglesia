@@ -12,9 +12,9 @@
 	$nueva_entrada = ($id == -1);
 
 	if ($nueva_entrada) { // Quieren CREAR una nueva entrada, así que no se cargan datos.
-        $persona_nombre = "<introduzca nombre>";
-        $persona_telefono = "<introduzca telefono>";
-        $persona_idc = "<introduzca id de categoria>";
+        $persona_nombre = "";
+        $persona_telefono = "";
+        $persona_idc = "";
 	} else { // Quieren VER la ficha de una categoría existente, cuyos datos se cargan.
 		$sqlPersona = "SELECT * FROM persona  WHERE id=? ";
 
@@ -40,12 +40,17 @@ $rsCategoria = $selectCategoria->fetchAll();
 
 <head>
 	<meta charset="UTF-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <link rel="stylesheet" href="css.css">
 </head>
 
 
 
 <body>
-
+<nav class="navbar navbar-dark bg-primary">
+  <a class="navbar-brand">Agenda</a>
+</nav>
+<div id="body">
 <?php if ($nueva_entrada) { ?>
 	<h1>Nueva ficha de categoría</h1>
 <?php } else { ?>
@@ -56,16 +61,16 @@ $rsCategoria = $selectCategoria->fetchAll();
 
 <input type="hidden" name="id" value="<?=$id?>" />
 
-<ul>
-	<li>
+<ul class="list-group">
+	<li class="list-group-item list-group-item-action">
 		<strong>Nombre: </strong>
 		<input type="text" name="nombre" value="<?=$persona_nombre?>" />
 	</li>
-    <li>
+    <li class="list-group-item list-group-item-action">
 		<strong>Telefono: </strong>
 		<input type="text" name="telefono" value="<?=$persona_telefono?>" />
 	</li>
-    <li>
+    <li class="list-group-item list-group-item-action">
 		<strong>Categoria: </strong>
         <select name="categoria_id" >
             <?php foreach ($rsCategoria as $fila){?>
@@ -78,22 +83,20 @@ $rsCategoria = $selectCategoria->fetchAll();
 </ul>
 
 <?php if ($nueva_entrada) { ?>
-	<input type="submit" name="crear" value="Añadir persona" />
+	<input type="submit" name="crear" value="Añadir persona"   class="btn btn-primary"/>
 <?php } else { ?>
-	<input type="submit" name="guardar" value="Guardar cambios" />
+	<input type="submit" name="guardar" value="Guardar cambios"  class="btn btn-primary"/>
 <?php } ?>
 
 </form>
 
 <br />
 
-<a href="persona-eliminar.php?id=<?=$id ?>">Eliminar Personas</a>
+<a href="persona-eliminar.php?id=<?=$id ?>"  class="btn btn-primary">Eliminar Personas</a>
 
-<br />
-<br />
 
-<a href="persona-listado.php">Volver al listado de Personas.</a>
-
+<a href="persona-listado.php"  class="btn btn-primary">Volver al listado de Personas.</a>
+</div>
 </body>
 
 </html>

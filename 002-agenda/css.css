@@ -1,0 +1,16 @@
+#body {
+    background-color: #fafafa;
+    padding: 5px;
+    border: 2px solid #ccc;
+    text-align: center;
+    margin-top: 5px;
+    margin-left: 20%;
+    margin-right: 20%;
+
+}
+table   {
+    text-align: center;
+}
+nav{
+    text-align: center;
+}
