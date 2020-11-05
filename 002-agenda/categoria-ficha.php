@@ -54,7 +54,9 @@ if ($nueva_entrada) { // Quieren CREAR una nueva entrada, así que no se cargan 
         <ul class="list-group">
             <li class="list-group-item list-group-item-action">
                 <strong>Nombre: </strong>
-                <input type="text" name="nombre" value="<?= $categoria_nombre ?>"/>
+                <input type="text" <?php if ($nueva_entrada) {
+                    echo 'placeholder = "Categoria"';
+                } ?> name="nombre" value="<?= $categoria_nombre ?>"/>
             </li>
         </ul>
 

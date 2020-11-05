@@ -63,11 +63,14 @@ $rsCategoria = $selectCategoria->fetchAll();
         <ul class="list-group">
             <li class="list-group-item list-group-item-action">
                 <strong>Nombre: </strong>
-                <input type="text" name="nombre" value="<?= $persona_nombre ?>"/>
+                <input type="text" name="nombre" <?php if ($nueva_entrada) {
+                    echo 'placeholder = "Nombre"';} ?> value="<?= $persona_nombre ?>"/>
             </li>
             <li class="list-group-item list-group-item-action">
                 <strong>Telefono: </strong>
-                <input type="text" name="telefono" value="<?= $persona_telefono ?>"/>
+                <input type="text" name="telefono" <?php if ($nueva_entrada) {
+                    echo 'placeholder = "Telefono"';
+                } ?>value="<?= $persona_telefono ?>"/>
             </li>
             <li class="list-group-item list-group-item-action">
                 <strong>Categoria: </strong>
