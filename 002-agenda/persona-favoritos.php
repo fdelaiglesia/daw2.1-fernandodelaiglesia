@@ -50,6 +50,7 @@ $personas = $select->fetchAll();
 
         <?php
         foreach ($personas as $filaUnica) { ?>
+            <?php if($filaUnica["p_estrella"]){?>
             <tr>
                 <td><a href="persona-ficha.php?id=<?= $filaUnica["p_id"] ?>"> <?= $filaUnica["p_nombre"] ?> </a></td>
                 <td><a href="persona-ficha.php?id=<?= $filaUnica["p_id"] ?>"> <?= $filaUnica["p_apellido"] ?> </a></td>
@@ -68,6 +69,7 @@ $personas = $select->fetchAll();
 
                     </a></td>
             </tr>
+            <?php } ?>
         <?php } ?>
 
     </table>
@@ -76,7 +78,7 @@ $personas = $select->fetchAll();
 
     <a href="persona-ficha.php?id=-1" class="btn btn-primary">Añadir una persona</a>
     <a href="categoria-listado.php" class="btn btn-primary">Gestionar listado de Categorias</a>
-    <a href="persona-favoritos.php" class="btn btn-primary">Ver solo favoritos</a>
+    <a href="persona-listado.php" class="btn btn-primary">Ver todos</a>
 </div>
 </body>
 

@@ -13,6 +13,7 @@ $nueva_entrada = ($id == -1);
 
 if ($nueva_entrada) { // Quieren CREAR una nueva entrada, así que no se cargan datos.
     $persona_nombre = "";
+    $persona_apellido = "";
     $persona_telefono = "";
     $persona_idc = "";
 } else { // Quieren VER la ficha de una categoría existente, cuyos datos se cargan.
@@ -24,8 +25,11 @@ if ($nueva_entrada) { // Quieren CREAR una nueva entrada, así que no se cargan 
 
     // Con esto, accedemos a los datos de la primera (y esperemos que única) fila que haya venido.
     $persona_nombre = $rsPersona[0]["nombre"];
+    $persona_apellido = $rsPersona[0]["apellido"];
     $persona_telefono = $rsPersona[0]["telefono"];
+    $persona_estrella = $rsPersona[0]["estrella"];
     $persona_idc = $rsPersona[0]["categoria_id"];
+
 
 
 }
@@ -67,10 +71,26 @@ $rsCategoria = $selectCategoria->fetchAll();
                     echo 'placeholder = "Nombre"';} ?> value="<?= $persona_nombre ?>"/>
             </li>
             <li class="list-group-item list-group-item-action">
+                <strong>Apellido: </strong>
+                <input type="text" name="apellido" <?php if ($nueva_entrada) {
+                    echo 'placeholder = "Apellido"';} ?> value="<?= $persona_apellido ?>"/>
+            </li>
+            <li class="list-group-item list-group-item-action">
                 <strong>Telefono: </strong>
                 <input type="text" name="telefono" <?php if ($nueva_entrada) {
                     echo 'placeholder = "Telefono"';
                 } ?>value="<?= $persona_telefono ?>"/>
+            </li>
+            <li class="list-group-item list-group-item-action">
+                <strong>Favorito: </strong>
+                <input type="hidden" name="estrella" value="0">
+                <input type="checkbox" name="estrella" value="1"
+
+                    <?php if(!$nueva_entrada){
+                    if ($persona_estrella == 1) {
+                        echo 'checked';
+                        $persona_estrella == 1;
+                    }} ?>/>
             </li>
             <li class="list-group-item list-group-item-action">
                 <strong>Categoria: </strong>
@@ -98,7 +118,7 @@ $rsCategoria = $selectCategoria->fetchAll();
     <a href="persona-eliminar.php?id=<?= $id ?>" class="btn btn-primary">Eliminar Personas</a>
 
 
-    <a href="persona-listado.php" class="btn btn-primary">Volver al listado de Personas.</a>
+    <a href="persona-listado.php" class="btn btn-primary">Volver al listado de personas</a>
 </div>
 </body>
 

@@ -6,7 +6,9 @@ $pdo = obtenerPdoConexionBD();
 // Se recogen los datos del formulario de la request.
 $id = (int)$_REQUEST["id"];
 $nombre = $_REQUEST["nombre"];
+$apellido = $_REQUEST["apellido"];
 $telefono = $_REQUEST["telefono"];
+$estrella = $_REQUEST["estrella"];
 $categoria_id = $_REQUEST["categoria_id"];
 
 // Si id es -1 quieren CREAR una nueva entrada ($nueva_entrada tomará true).
@@ -16,12 +18,12 @@ $nueva_entrada = ($id == -1);
 
 if ($nueva_entrada) {
     // Quieren CREAR una nueva entrada, así que es un INSERT.
-    $sql = "INSERT INTO persona (nombre,telefono,categoria_id) VALUES (?,?,?)";
-    $parametros = [$nombre, $telefono, $categoria_id];
+    $sql = "INSERT INTO persona (nombre,apellido,telefono,estrella,categoria_id) VALUES (?,?,?,?,?)";
+    $parametros = [$nombre, $apellido ,$telefono, $estrella, $categoria_id];
 } else {
     // Quieren MODIFICAR una categoría existente y es un UPDATE.
-    $sql = "UPDATE persona SET nombre=?, telefono=?, categoria_id=? WHERE id=?";
-    $parametros = [$nombre, $telefono, $categoria_id, $id];
+    $sql = "UPDATE persona SET nombre=?, apellido=?, telefono=?, estrella=? ,categoria_id=? WHERE id=?";
+    $parametros = [$nombre,$apellido, $telefono, $estrella, $categoria_id, $id];
 }
 
 $sentencia = $pdo->prepare($sql);
