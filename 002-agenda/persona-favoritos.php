@@ -12,6 +12,7 @@ $sql = "
             FROM
                persona AS p INNER JOIN categoria AS c
                ON p.categoria_id = c.id
+            WHERE p.estrella = 1
             ORDER BY p.nombre
     ";
 $pdo = obtenerPdoConexionBD();
@@ -50,7 +51,7 @@ $personas = $select->fetchAll();
 
         <?php
         foreach ($personas as $filaUnica) { ?>
-            <?php if($filaUnica["p_estrella"]){?>
+
             <tr>
                 <td><a href="persona-ficha.php?id=<?= $filaUnica["p_id"] ?>"> <?= $filaUnica["p_nombre"] ?> </a></td>
                 <td><a href="persona-ficha.php?id=<?= $filaUnica["p_id"] ?>"> <?= $filaUnica["p_apellido"] ?> </a></td>
@@ -69,7 +70,7 @@ $personas = $select->fetchAll();
 
                     </a></td>
             </tr>
-            <?php } ?>
+
         <?php } ?>
 
     </table>
