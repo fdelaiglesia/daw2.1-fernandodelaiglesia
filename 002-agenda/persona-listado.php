@@ -63,7 +63,9 @@ $personas = $select->fetchAll();
                     </a></td>
                 <td><?php if ($filaUnica["p_estrella"]) {
                         echo '<img src="estrella.png" width="25" height="25">';
-                    } ?>
+                    }else if($filaUnica["p_estrella"] == 0){
+                        echo '<img src="estrellavacia.png" width="20" height="20">';
+                    }  ?>
 
 
                     </a></td>
