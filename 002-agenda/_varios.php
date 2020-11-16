@@ -1,4 +1,5 @@
 <?php
+
 function obtenerPdoConexionBD(): PDO
 {
     $servidor = "localhost";

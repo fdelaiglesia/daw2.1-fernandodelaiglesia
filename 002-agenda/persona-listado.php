@@ -1,6 +1,9 @@
 <?php
 
 require_once "_varios.php";
+$mostrarSoloEstrellas = isset($_REQUEST["soloFavs"]);
+
+$clausulaWhere = $mostrarSoloEstrellas ? "WHERE p.estrella=1" : "";
 $sql = "
            SELECT
                 p.id     AS p_id,
@@ -12,7 +15,8 @@ $sql = "
             FROM
                persona AS p INNER JOIN categoria AS c
                ON p.categoria_id = c.id
-            ORDER BY p.nombre
+            $clausulaWhere
+            ORDER BY p.nombre 
     ";
 $pdo = obtenerPdoConexionBD();
 $select = $pdo->prepare($sql);
@@ -61,7 +65,8 @@ $personas = $select->fetchAll();
                                   d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"/>
                         </svg>
                     </a></td>
-                <td><?php if ($filaUnica["p_estrella"]) {
+                <td><a href='establece-estrella.php?<?if(isset($_REQUEST["soloFavs"])){echo 'soloFavs';}
+                ?>&id=<?=$filaUnica["p_id"]?>'><?php if ($filaUnica["p_estrella"]) {
                         echo '<img src="estrella.png" width="25" height="25">';
                     }else if($filaUnica["p_estrella"] == 0){
                         echo '<img src="estrellavacia.png" width="20" height="20">';
@@ -78,8 +83,14 @@ $personas = $select->fetchAll();
 
     <a href="persona-ficha.php?id=-1" class="btn btn-primary">Añadir una persona</a>
     <a href="categoria-listado.php" class="btn btn-primary">Gestionar listado de Categorias</a>
-    <a href="persona-favoritos.php" class="btn btn-primary">Ver solo favoritos</a>
+
+    <?php if(isset($_REQUEST["soloFavs"])){
+        ?><a href="persona-listado.php" class="btn btn-primary">Ver todos</a><?php
+    }else{
+        ?><a href="persona-listado.php?soloFavs" class="btn btn-primary">Ver solo favoritos</a><?php
+    }?>
 </div>
+
 </body>
 
 </html>
