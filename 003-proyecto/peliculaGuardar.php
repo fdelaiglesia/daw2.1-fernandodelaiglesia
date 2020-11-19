@@ -29,15 +29,17 @@ $correcto = ($sql_con_exito && $una_fila_afectada);
 
 $datos_no_modificados = ($sql_con_exito && $ninguna_fila_afectada);
 ?>
-<html>
-
+<html
 <head>
-    <meta charset="UTF-8">
-   <link rel="stylesheet" href="css.css">
+    <meta charset="utf-8">
+    <title>Guardado</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <?php require 'partials/css.php' ?>
+
 </head>
-
-
 <body>
+<?php require 'partials/navbar.php' ?>
+<div id="body">
 
     <?php
     if ($correcto || $datos_no_modificados) { ?>
@@ -67,8 +69,8 @@ $datos_no_modificados = ($sql_con_exito && $ninguna_fila_afectada);
     }
     ?>
 
-    <a href="peliculaListado.php">Volver al listado de peliculas.</a>
-
+    <a href="peliculaListado.php" class="btn btn-secondary">Volver al listado de peliculas.</a>
+</div>
 </body>
 
 </html>

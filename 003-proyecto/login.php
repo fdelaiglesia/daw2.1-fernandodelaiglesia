@@ -17,14 +17,14 @@ if(!empty($_POST["usuario"]) && !empty($_POST["contrasenya"])){
         $_SESSION['usuario'] = $login[0]["usuario"];
         redireccionar("peliculaListado.php");
     }else{
-        $mensaje = "No existe este usuario o ha introducido mal la contraseña";
+        $mensaje = "<p class='mensaje'>No existe este usuario o ha introducido mal la contraseña</p>";
     }
 }
 
 ?>
 <head>
     <meta charset="utf-8">
-    <title>HTML</title>
+    <title>Videoclub</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <?php require 'partials/css.php'?>
 </head>
@@ -33,16 +33,21 @@ if(!empty($_POST["usuario"]) && !empty($_POST["contrasenya"])){
 <?php require 'partials/navbar.php'?>
 <div id="body">
 <h1>Videoclub</h1>
-<?php if(isset($_REQUEST["registro"])){echo '<p>usuario creado correctamente</p>';}?>
+    <p><?=$mensaje?></p>
+<?php if(isset($_REQUEST["registro"])){echo '<p class="mensajeCorrecto">usuario creado correctamente</p>';}?>
 <form action="login.php" method="post" >
     <div class="form-group">
     <p>Usuario: <input type="text" name="usuario" ></p>
     <p>Contraseña: <input type="password" name="contrasenya" ></p>
-    <input type="submit" name="guardar" value="Login" class="btn btn-secondary">
-    <a href="registro.php" class="btn btn-secondary">Registrarse</a>
-    <p><?=$mensaje?></p>
+    <input type="submit" name="guardar" value="Enviar" class="btn btn-secondary">
+
+
     </div>
 </form>
+    <a href="registro.php" class="btn btn-danger">Registrarse</a>
 </div>
+<p>Usuario y contraseña para entrar al CRUD:
+admin
+admin</p>
 </body>
 </html>

@@ -26,3 +26,9 @@ table {
 #logout {
     text-decoration: none;
 }
+.mensaje{
+    color: red;
+}
+.mensajeCorrecto{
+    color:green;
+}

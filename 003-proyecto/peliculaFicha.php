@@ -7,7 +7,11 @@ $id = (int)$_REQUEST["id"];
 //Variable para comprobar que el usuario es el administrador del sitio
 $admin = ($_SESSION['usuario'] == 'admin');
 $nueva_entrada = ($id == -1);
-
+//Si no hay sesion te lleva a que te registres.
+if($_SESSION['usuario'] == null){
+    redireccionar("login.php");
+}
+//Nueva entrada: Crea los inputs en blanco
 if ($nueva_entrada) {
     $peliculaTitulo = "";
     $peliculaAnyo = "";
@@ -15,6 +19,7 @@ if ($nueva_entrada) {
     $peliculaValoracion = "";
     $peliculaLinkPortada = "";
 } else {
+    //Esto trae los datos de la pelicula con la id seleccionada
     $sqlPelicula = "SELECT * FROM pelicula  WHERE id=? ";
 
     $selectPelicula = $pdo->prepare($sqlPelicula);
@@ -33,7 +38,7 @@ if ($nueva_entrada) {
 ?>
 <head>
     <meta charset="utf-8">
-    <title>HTML</title>
+    <title><?= $peliculaTitulo ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <?php require 'partials/css.php' ?>
 

@@ -18,16 +18,17 @@ $correcto = ($sql_con_exito && $una_fila_afectada);
 
 $no_existia = ($sql_con_exito && $ninguna_fila_afectada);
 ?>
-<html>
-
+<html
 <head>
+    <meta charset="utf-8">
+    <title>Eliminado</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <?php require 'partials/css.php' ?>
 
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="css.css">
 </head>
-
-
 <body>
+<?php require 'partials/navbar.php' ?>
+<div id="body">
     <?php if ($correcto) { ?>
 
         <h1>Eliminación completada</h1>
@@ -45,7 +46,8 @@ $no_existia = ($sql_con_exito && $ninguna_fila_afectada);
 
     <?php } ?>
 
-    <a href="peliculaListado.php">Volver al listado de peliculas.</a>
+    <a href="peliculaListado.php" class="btn btn-secondary">Volver al listado de peliculas.</a>
+</div>
 
 </body>
 
