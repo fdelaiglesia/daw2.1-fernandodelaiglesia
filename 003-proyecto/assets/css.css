@@ -1,0 +1,28 @@
+#body {
+    background-color: #fafafa;
+    padding: 5px;
+    border: 2px solid #ccc;
+    text-align: center;
+    margin-top: 5px;
+    margin-left: 10%;
+    margin-right: 10%;
+
+}
+
+table {
+    text-align: center;
+}
+.formFicha{
+    float: right !important;
+    width: 500px !important;
+}
+
+#usuario {
+    text-transform: uppercase;
+    margin-left: 60em;
+    color: white;
+}
+
+#logout {
+    text-decoration: none;
+}

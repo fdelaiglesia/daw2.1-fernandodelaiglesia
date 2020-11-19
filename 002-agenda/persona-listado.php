@@ -16,7 +16,7 @@ $sql = "
                persona AS p INNER JOIN categoria AS c
                ON p.categoria_id = c.id
             $clausulaWhere
-            ORDER BY p.estrella desc, p.nombre 
+            ORDER BY  p.nombre 
     ";
 $pdo = obtenerPdoConexionBD();
 $select = $pdo->prepare($sql);
