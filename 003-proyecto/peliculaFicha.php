@@ -18,6 +18,7 @@ if ($nueva_entrada) {
     $peliculaDirector = "";
     $peliculaValoracion = "";
     $peliculaLinkPortada = "";
+    $peliculaGenero= "";
 } else {
     //Esto trae los datos de la pelicula con la id seleccionada
     $sqlPelicula = "SELECT * FROM pelicula  WHERE id=? ";
@@ -33,13 +34,14 @@ if ($nueva_entrada) {
     $peliculaGenero = $pelicula[0]["genero"];
     $peliculaLinkPortada = $pelicula[0]["portada"];
 
-    $sqlGenero = "SELECT * FROM genero";
-    $selectGenero = $pdo->prepare($sqlGenero);
-    $selectGenero->execute([]);
-    $genero = $selectGenero->fetchAll();
 
 
 }
+$sqlGenero = "SELECT * FROM genero";
+$selectGenero = $pdo->prepare($sqlGenero);
+$selectGenero->execute([]);
+$genero = $selectGenero->fetchAll();
+
 
 ?>
 <head>
@@ -139,8 +141,9 @@ if ($nueva_entrada) {
             <?php } else { ?>
                 <input type="submit" name="guardar" value="Guardar cambios" class="btn btn-secondary"/>
             <?php } ?>
+            <a href="peliculaEliminar.php?id=<?= $id ?>" class="btn btn-danger">Eliminar pelicula</a>
         <?php } ?>
-        <a href="generoEliminar.php?id=<?= $id ?>" class="btn btn-danger">Eliminar genero</a>
+
         <a href="peliculaListado.php" class="btn btn-secondary">Volver al listado</a>
 
     </form>
