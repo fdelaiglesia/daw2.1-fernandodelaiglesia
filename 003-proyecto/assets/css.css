@@ -32,3 +32,6 @@ table {
 .mensajeCorrecto{
     color:green;
 }
+.busqueda{
+    width: 500px;
+}

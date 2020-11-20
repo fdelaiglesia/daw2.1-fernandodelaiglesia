@@ -5,19 +5,23 @@ $mensaje= '';
 if(isset($_SESSION['usuario'])){
     redireccionar("peliculaListado.php");
 }
-if(!empty($_POST["usuario"]) && !empty($_POST["contrasenya"])){
-    $pdo = conectarBD();
-    $sql = "SELECT id,usuario,contrasenya FROM usuario WHERE usuario=:usuario";
-    $select = $pdo->prepare($sql);
-    $select->bindParam(':usuario', $_POST["usuario"]);
-    $select->execute();
-    $login = $select->fetchAll();
-    if(count($login)> 0 && $_POST["contrasenya"] == $login[0]["contrasenya"]) {
-        $_SESSION['usuarioId'] = $login[0]["id"];
-        $_SESSION['usuario'] = $login[0]["usuario"];
-        redireccionar("peliculaListado.php");
+if(isset($_REQUEST["guardar"])) {
+    if (!empty($_POST["usuario"]) && !empty($_POST["contrasenya"])) {
+        $pdo = conectarBD();
+        $sql = "SELECT id,usuario,contrasenya FROM usuario WHERE usuario=:usuario";
+        $select = $pdo->prepare($sql);
+        $select->bindParam(':usuario', $_POST["usuario"]);
+        $select->execute();
+        $login = $select->fetchAll();
+        if (count($login) > 0 && $_POST["contrasenya"] == $login[0]["contrasenya"]) {
+            $_SESSION['usuarioId'] = $login[0]["id"];
+            $_SESSION['usuario'] = $login[0]["usuario"];
+            redireccionar("peliculaListado.php");
+        } else {
+            $mensaje = "<p class='mensaje'>No existe este usuario o ha introducido mal la contraseña</p>";
+        }
     }else{
-        $mensaje = "<p class='mensaje'>No existe este usuario o ha introducido mal la contraseña</p>";
+        $mensaje = "<p class='mensaje'>Algo esta en blanco</p>";
     }
 }
 
@@ -46,8 +50,5 @@ if(!empty($_POST["usuario"]) && !empty($_POST["contrasenya"])){
 </form>
     <a href="registro.php" class="btn btn-danger">Registrarse</a>
 </div>
-<p>Usuario y contraseña para entrar al CRUD:
-admin
-admin</p>
 </body>
 </html>

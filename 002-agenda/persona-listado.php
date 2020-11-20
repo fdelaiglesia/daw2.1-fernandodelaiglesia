@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 require_once "_varios.php";
 $mostrarSoloEstrellas = isset($_REQUEST["soloFavs"]);
 
@@ -36,10 +36,21 @@ $personas = $select->fetchAll();
 
 
 <body>
-<nav class="navbar navbar-dark bg-primary">
+<nav class="navbar navbar-dark <?php if($_SESSION['tema'] == 'rojo'){
+    echo 'bg-danger';
+}elseif ($_SESSION['tema'] == 'azul'){
+    echo 'bg-primary';
+}elseif ($_SESSION['tema'] == 'verde'){
+    echo 'bg-success';
+}else{
+    echo 'bg-secondary';
+} ?> ">
     <a id="agenda" class="navbar-brand">Agenda</a>
 </nav>
 <div id="body">
+    <a href="estableceTema.php?listado&tema=verde">Verde</a>
+    <a href="estableceTema.php?listado&tema=rojo">Rojo</a>
+    <a href="estableceTema.php?listado&tema=azul">Azul</a>
     <h1>Listado de Personas</h1>
 
     <table class="table table-striped table-hover">
@@ -81,13 +92,45 @@ $personas = $select->fetchAll();
 
     <br/>
 
-    <a href="persona-ficha.php?id=-1" class="btn btn-primary">Añadir una persona</a>
-    <a href="categoria-listado.php" class="btn btn-primary">Gestionar listado de Categorias</a>
+    <a href="persona-ficha.php?id=-1" class="btn <?php if($_SESSION['tema'] == 'rojo'){
+        echo 'btn-danger"';
+    }elseif ($_SESSION['tema'] == 'azul'){
+        echo 'btn-primary"';
+    }elseif ($_SESSION['tema'] == 'verde'){
+        echo 'btn-success"';
+    }else{
+        echo 'btn-secondary"';
+    }?>">Añadir una persona</a>
+    <a href="categoria-listado.php" class="btn <?php if($_SESSION['tema'] == 'rojo'){
+        echo 'btn-danger"';
+    }elseif ($_SESSION['tema'] == 'azul'){
+        echo 'btn-primary"';
+    }elseif ($_SESSION['tema'] == 'verde'){
+        echo 'btn-success"';
+    }else{
+        echo 'btn-secondary"';
+    }?>">Gestionar listado de Categorias</a>
 
     <?php if(isset($_REQUEST["soloFavs"])){
-        ?><a href="persona-listado.php" class="btn btn-primary">Ver todos</a><?php
+        ?><a href="persona-listado.php" class="btn <?php if($_SESSION['tema'] == 'rojo'){
+            echo 'btn-danger"';
+        }elseif ($_SESSION['tema'] == 'azul'){
+            echo 'btn-primary"';
+        }elseif ($_SESSION['tema'] == 'verde'){
+            echo 'btn-success"';
+        }else{
+            echo 'btn-secondary"';
+        }?> ">Ver todos</a><?php
     }else{
-        ?><a href="persona-listado.php?soloFavs" class="btn btn-primary">Ver solo favoritos</a><?php
+        ?><a href="persona-listado.php?soloFavs" class="btn <?php if($_SESSION['tema'] == 'rojo'){
+            echo 'btn-danger"';
+        }elseif ($_SESSION['tema'] == 'azul'){
+            echo 'btn-primary"';
+        }elseif ($_SESSION['tema'] == 'verde'){
+            echo 'btn-success"';
+        }else{
+            echo 'btn-secondary"';
+        } ?> ">Ver solo favoritos</a><?php
     }?>
 </div>
 

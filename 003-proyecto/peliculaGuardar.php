@@ -7,16 +7,17 @@ $titulo = $_REQUEST["titulo"];
 $anyo = $_REQUEST["anyo"];
 $director = $_REQUEST["director"];
 $valoracion = $_REQUEST["valoracion"];
+$genero = $_REQUEST["genero"];
 $portada = $_REQUEST["portada"];
 
 $nueva_entrada = ($id == -1);
 
 if ($nueva_entrada) {
-    $sql = "INSERT INTO pelicula (titulo,anyo,director,valoracion,portada) VALUES (?,?,?,?,?)";
-    $parametros = [$titulo, $anyo ,$director, $valoracion, $portada ];
+    $sql = "INSERT INTO pelicula (titulo,anyo,director,valoracion,genero ,portada) VALUES (?,?,?,?,?,?)";
+    $parametros = [$titulo, $anyo ,$director, $valoracion,$genero, $portada ];
 } else {
-    $sql = "UPDATE pelicula SET titulo=?, anyo=?, director=?, valoracion=?,portada=? WHERE id=?";
-    $parametros = [$titulo,$anyo, $director, $valoracion,$portada, $id];
+    $sql = "UPDATE pelicula SET titulo=?, anyo=?, director=?, valoracion=?,genero = ?,portada=? WHERE id=?";
+    $parametros = [$titulo,$anyo, $director, $valoracion,$genero, $portada, $id];
 }
 
 $sentencia = $pdo->prepare($sql);

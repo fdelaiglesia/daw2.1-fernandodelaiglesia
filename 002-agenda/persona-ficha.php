@@ -1,6 +1,6 @@
 <?php
 require_once "_varios.php";
-
+session_start();
 $pdo = obtenerPdoConexionBD();
 
 // Se recoge el parámetro "id" de la request.
@@ -50,8 +50,15 @@ $rsCategoria = $selectCategoria->fetchAll();
 
 
 <body>
-<nav class="navbar navbar-dark bg-primary">
-    <a class="navbar-brand">Agenda</a>
+<nav class="navbar navbar-dark <?php if($_SESSION['tema'] == 'rojo'){
+    echo 'bg-danger';
+}elseif ($_SESSION['tema'] == 'azul'){
+    echo 'bg-primary';
+}elseif ($_SESSION['tema'] == 'verde'){
+    echo 'bg-success';
+}else{
+    echo 'bg-secondary';
+} ?> ">    <a class="navbar-brand">Agenda</a>
 </nav>
 <div id="body">
     <?php if ($nueva_entrada) { ?>

@@ -30,7 +30,13 @@ if ($nueva_entrada) {
     $peliculaAnyo = $pelicula[0]["anyo"];
     $peliculaDirector = $pelicula[0]["director"];
     $peliculaValoracion = $pelicula[0]["valoracion"];
+    $peliculaGenero = $pelicula[0]["genero"];
     $peliculaLinkPortada = $pelicula[0]["portada"];
+
+    $sqlGenero = "SELECT * FROM genero";
+    $selectGenero = $pdo->prepare($sqlGenero);
+    $selectGenero->execute([]);
+    $genero = $selectGenero->fetchAll();
 
 
 }
@@ -101,6 +107,26 @@ if ($nueva_entrada) {
             echo '<p>' . $peliculaValoracion . '</p>';
         } ?>
         <hr>
+        <strong>Genero: </strong>
+        <?php if($admin){ ?>
+        <select name="genero">
+            <?php foreach ($genero as $filaGenero) { ?>
+                <option value="<?= $filaGenero["id"] ?>" <?php if ($filaGenero["id"] == $peliculaGenero) {
+                    echo "selected = 'true'";
+                } ?>><?= $filaGenero["genero"] ?></option>
+                <?php
+            } ?>
+        </select>
+        <?php }else {
+            foreach ($genero as $filaGenero) {
+                if ($filaGenero["id"] == $peliculaGenero) {
+                    echo '<p>' . $filaGenero["genero"] . '</p>';
+                }
+
+            }
+        }?>
+
+        <hr>
         <?php if ($admin) { ?>
             <strong>Link portada: </strong>
             <input type="text" name="portada" <?php if ($nueva_entrada) {
@@ -114,7 +140,9 @@ if ($nueva_entrada) {
                 <input type="submit" name="guardar" value="Guardar cambios" class="btn btn-secondary"/>
             <?php } ?>
         <?php } ?>
+        <a href="generoEliminar.php?id=<?= $id ?>" class="btn btn-danger">Eliminar genero</a>
         <a href="peliculaListado.php" class="btn btn-secondary">Volver al listado</a>
+
     </form>
 
 
