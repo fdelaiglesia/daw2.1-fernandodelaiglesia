@@ -3,24 +3,20 @@ require_once "_varios.php";
 session_start();
 $pdo = conectarBD();
 
-// Se recoge el parámetro "id" de la request.
+
 $id = (int)$_REQUEST["id"];
 
-// Si id es -1 quieren CREAR una nueva entrada ($nueva_entrada tomará true).
-// Sin embargo, si id NO es -1 quieren VER la ficha de una categoría existente
-// (y $nueva_entrada tomará false).
 $nueva_entrada = ($id == -1);
 
-if ($nueva_entrada) { // Quieren CREAR una nueva entrada, así que no se cargan datos.
+if ($nueva_entrada) {
     $generoNombre = "";
-} else { // Quieren VER la ficha de una categoría existente, cuyos datos se cargan.
+} else {
     $sql = "SELECT genero FROM genero WHERE id=?";
 
     $select = $pdo->prepare($sql);
-    $select->execute([$id]); // Se añade el parámetro a la consulta preparada.
+    $select->execute([$id]);
     $rs = $select->fetchAll();
 
-    // Con esto, accedemos a los datos de la primera (y esperemos que única) fila que haya venido.
     $generoNombre= $rs[0]["genero"];
 }
 ?>

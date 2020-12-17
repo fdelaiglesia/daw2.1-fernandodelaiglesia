@@ -6,7 +6,7 @@ $pdo = conectarBD();
 $sql = "SELECT * FROM genero";
 
 $select = $pdo->prepare($sql);
-$select->execute([]); // Array vacío porque la consulta preparada no requiere parámetros.
+$select->execute([]);
 $rs = $select->fetchAll();
 ?>
 

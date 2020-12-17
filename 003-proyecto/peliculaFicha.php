@@ -2,16 +2,12 @@
 require_once "_varios.php";
 $pdo = conectarBD();
 session_start();
-//Recoge el parametro id(Puede ser -1)
 $id = (int)$_REQUEST["id"];
-//Variable para comprobar que el usuario es el administrador del sitio
 $admin = ($_SESSION['usuario'] == 'admin');
 $nueva_entrada = ($id == -1);
-//Si no hay sesion te lleva a que te registres.
 if($_SESSION['usuario'] == null){
     redireccionar("login.php");
 }
-//Nueva entrada: Crea los inputs en blanco
 if ($nueva_entrada) {
     $peliculaTitulo = "";
     $peliculaAnyo = "";
@@ -20,7 +16,6 @@ if ($nueva_entrada) {
     $peliculaLinkPortada = "";
     $peliculaGenero= "";
 } else {
-    //Esto trae los datos de la pelicula con la id seleccionada
     $sqlPelicula = "SELECT * FROM pelicula  WHERE id=? ";
 
     $selectPelicula = $pdo->prepare($sqlPelicula);
@@ -33,9 +28,6 @@ if ($nueva_entrada) {
     $peliculaValoracion = $pelicula[0]["valoracion"];
     $peliculaGenero = $pelicula[0]["genero"];
     $peliculaLinkPortada = $pelicula[0]["portada"];
-
-
-
 }
 $sqlGenero = "SELECT * FROM genero";
 $selectGenero = $pdo->prepare($sqlGenero);
@@ -142,7 +134,7 @@ $genero = $selectGenero->fetchAll();
                 <input type="submit" name="guardar" value="Guardar cambios" class="btn btn-secondary"/>
             <?php } ?>
             <a href="peliculaEliminar.php?id=<?= $id ?>" class="btn btn-danger">Eliminar pelicula</a>
-        <?php } ?>
+        <?php }?>
 
         <a href="peliculaListado.php" class="btn btn-secondary">Volver al listado</a>
 
@@ -152,4 +144,3 @@ $genero = $selectGenero->fetchAll();
 </div>
 </body>
 </html>
-
