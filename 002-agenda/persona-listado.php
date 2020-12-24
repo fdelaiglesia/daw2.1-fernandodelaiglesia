@@ -1,4 +1,6 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 'On');
 session_start();
 require_once "_varios.php";
 $mostrarSoloEstrellas = isset($_REQUEST["soloFavs"]);
@@ -92,13 +94,13 @@ $personas = $select->fetchAll();
 
     <br/>
 
-    <a href="persona-ficha.php?id=-1" class="btn <?php if($_SESSION['tema'] == 'rojo'){
+    <a href="persona-ficha.php?id=-1" class="btn <?php if(isset($_SESSION)) { if($_SESSION['tema'] == 'rojo'){
         echo 'btn-danger"';
     }elseif ($_SESSION['tema'] == 'azul'){
         echo 'btn-primary"';
     }elseif ($_SESSION['tema'] == 'verde'){
         echo 'btn-success"';
-    }else{
+    }}else{
         echo 'btn-secondary"';
     }?>">Añadir una persona</a>
     <a href="categoria-listado.php" class="btn <?php if($_SESSION['tema'] == 'rojo'){
