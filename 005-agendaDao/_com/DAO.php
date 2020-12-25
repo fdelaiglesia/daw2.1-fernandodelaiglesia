@@ -118,4 +118,78 @@ class DAO
 
         return $datos;
     }
+
+/*PERSONA*/
+
+    private static function personaCrearDesdeRs(array $fila): Persona
+    {
+        return new Persona($fila["id"], $fila["nombre"], $fila["apellidos"], $fila["telefono"], $fila["estrella"], $fila["categoriaId"]);
+    }
+
+    public static function personaObtenerPorId(int $id): ?Persona
+    {
+        $rs = self::ejecutarConsulta(
+            "SELECT * FROM Persona WHERE id=?",
+            [$id]
+        );
+        if ($rs) return self::personaCrearDesdeRs($rs[0]);
+        else return null;
+    }
+
+    public static function personaActualizar(int $id, string $nombre, string $apellidos, string $telefono, bool $estrella, int $categoriaId)
+    {
+        self::ejecutarActualizacion(
+            "UPDATE Persona SET nombre=?, apellidos=?, telefono=?, estrella=?, categoriaId=? WHERE id=?",
+            [$nombre, $apellidos, $telefono, $estrella, $categoriaId, $id]
+        );
+    }
+
+    public static function personaCrear(string $nombre, string $apellidos, string $telefono, bool $estrella, int $categoriaId): bool
+    {
+        return self::ejecutarActualizacion(
+            "INSERT INTO Persona (nombre, apellidos, telefono, estrella, categoriaId) VALUES (?, ?, ?, ?, ?)",
+            [$nombre, $apellidos, $telefono, $estrella, $categoriaId]
+        );
+    }
+
+    public static function personaEliminar(int $id): bool
+    {
+
+        $sql = "DELETE FROM Persona WHERE id=?";
+
+        return self::ejecutarActualizacion($sql, [$id]);
+    }
+
+    public static function personaObtenerTodas($posibleClausulaWhere): array
+    {
+        $datos = [];
+        $rs = self::ejecutarConsulta(
+            "SELECT * FROM Persona $posibleClausulaWhere ORDER BY nombre",
+            []
+        );
+
+        foreach ($rs as $fila) {
+            $persona = self::personaCrearDesdeRs($fila);
+            array_push($datos, $persona);
+        }
+
+        return $datos;
+    }
+
+    public static function personaObtenerCategoria(int $id): string
+    {
+        $rs= self::ejecutarConsulta(
+            "SELECT nombre FROM Categoria WHERE id=?",
+            [$id]
+        );
+        return $rs[0]["nombre"];
+    }
+    public static function personaCambiarEstrella(int $id): bool
+    {
+        return self::ejecutarActualizacion(
+            "UPDATE Persona SET estrella = (NOT (SELECT estrella FROM Persona WHERE id=?)) WHERE id=?",
+            [$id, $id]
+        );
+
+    }
 }

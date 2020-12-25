@@ -1,13 +1,11 @@
 <?php
-    require_once "_com/Varios.php";
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+require_once "_com/DAO.php";
 
-    $conexion = obtenerPdoConexionBD();
 
-    $id = $_REQUEST["id"];
+$id = $_REQUEST["id"];
+$estrella = DAO::personaCambiarEstrella($id);
 
-    $sql = "UPDATE Persona SET estrella = (NOT (SELECT estrella FROM Persona WHERE id=?)) WHERE id=?";
-    $sentencia = $conexion->prepare($sql);
-    $sentencia->execute([$id, $id]);
-
-    redireccionar("PersonaListado.php");
-?>
+redireccionar("PersonaListado.php");

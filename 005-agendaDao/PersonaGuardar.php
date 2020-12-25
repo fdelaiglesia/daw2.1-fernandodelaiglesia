@@ -1,9 +1,11 @@
 <?php
-	require_once "_com/Varios.php";
-
-	$conexion = obtenerPdoConexionBD();
-
-	// Se recogen los datos del formulario de la request.
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+	require_once "_com/DAO.php";
+$persona =false;
+$personaModificar = false;
+	
 	$id = (int)$_REQUEST["id"];
 	$nombre = $_REQUEST["nombre"];
 	$apellidos = $_REQUEST["apellidos"];
@@ -18,28 +20,13 @@
 	
 	if ($nuevaEntrada) {
 		// Quieren CREAR una nueva entrada, así que es un INSERT.
- 		$sql = "INSERT INTO Persona (nombre, apellidos, telefono, estrella, categoriaId) VALUES (?, ?, ?, ?, ?)";
-        $parametros = [$nombre, $apellidos, $telefono, $estrella?1:0, $categoriaId];
+ 		$persona = DAO::personaCrear($nombre,$apellidos,$telefono,$estrella,$categoriaId);
 	} else {
 		// Quieren MODIFICAR una persona existente y es un UPDATE.
- 		$sql = "UPDATE Persona SET nombre=?, apellidos=?, telefono=?, estrella=?, categoriaId=? WHERE id=?";
-        $parametros = [$nombre, $apellidos, $telefono, $estrella?1:0, $categoriaId, $id];
+ 		$personaModificar = DAO::personaActualizar($id,$nombre,$apellidos,$telefono,$estrella,$categoriaId);
  	}
 
-    $sentencia = $conexion->prepare($sql);
-    // Esta llamada devuelve true o false según si la ejecución de la sentencia ha ido bien o mal.
-    $sqlConExito = $sentencia->execute($parametros); // Se añaden los parámetros a la consulta preparada.
 
-    //Se consulta la cantidad de filas afectadas por la ultima sentencia SQL.
-    $numFilasAfectadas = $sentencia->rowCount();
-    $unaFilaAfectada = ($numFilasAfectadas == 1);
-    $ningunaFilaAfectada = ($numFilasAfectadas == 0);
-
-    // Está todo correcto de forma NORMAL si NO ha habido errores y se ha visto afectada UNA fila.
-    $correcto = ($sqlConExito && $unaFilaAfectada);
-
-    // Si los datos no se habían modificado, también está correcto, pero de otra manera.
-    $datosNoModificados = ($sqlConExito && $ningunaFilaAfectada);
 ?>
 
 
@@ -56,7 +43,7 @@
 
 <?php
 	// Todo bien tanto si se han guardado los datos nuevos como si no se habían modificado.
-	if ($correcto || $datosNoModificados) { ?>
+	if ($personaModificar || $persona) { ?>
 
 		<?php if ($id == -1) { ?>
 			<h1>Inserción completada</h1>
